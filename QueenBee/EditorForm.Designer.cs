@@ -34,10 +34,11 @@
             this.tabPak = new System.Windows.Forms.TabPage();
             this.splitPak = new System.Windows.Forms.SplitContainer();
             this.lstPakContents = new System.Windows.Forms.ListView();
-            this.hdrPakFilename = new System.Windows.Forms.ColumnHeader();
-            this.hdrPakFullFilename = new System.Windows.Forms.ColumnHeader();
-            this.hdrPakPosition = new System.Windows.Forms.ColumnHeader();
-            this.hdrPakLength = new System.Windows.Forms.ColumnHeader();
+            this.hdrPakFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrPakFullFilename = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrPakPosition = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrPakLength = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.imgList = new System.Windows.Forms.ImageList(this.components);
             this.btnTestQbFile = new System.Windows.Forms.Button();
             this.btnTestSize = new System.Windows.Forms.Button();
@@ -74,25 +75,24 @@
             this.txtStringSearch = new System.Windows.Forms.TextBox();
             this.lblStringSearch = new System.Windows.Forms.Label();
             this.lstSearchResults = new System.Windows.Forms.ListView();
-            this.hdrSearchItem = new System.Windows.Forms.ColumnHeader();
-            this.hdrSearchFile = new System.Windows.Forms.ColumnHeader();
-            this.hdrSearchPos = new System.Windows.Forms.ColumnHeader();
-            this.hdrSearchType = new System.Windows.Forms.ColumnHeader();
+            this.hdrSearchItem = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrSearchFile = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrSearchPos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrSearchType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabQb = new System.Windows.Forms.TabPage();
             this.splitQb = new System.Windows.Forms.SplitContainer();
             this.lstQbItems = new System.Windows.Forms.ListView();
-            this.hdrItem = new System.Windows.Forms.ColumnHeader();
-            this.hdrDebugName = new System.Windows.Forms.ColumnHeader();
-            this.hdrValue = new System.Windows.Forms.ColumnHeader();
-            this.hdrPosition = new System.Windows.Forms.ColumnHeader();
-            this.hdrLength = new System.Windows.Forms.ColumnHeader();
-            this.hdrDataType = new System.Windows.Forms.ColumnHeader();
+            this.hdrItem = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrDebugName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrValue = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrPosition = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrLength = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.hdrDataType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.gboEdit = new System.Windows.Forms.GroupBox();
             this.btnSavePak = new System.Windows.Forms.Button();
             this.status = new System.Windows.Forms.StatusStrip();
             this.tlblPakFileInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.tlblQbFileInfo = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tlblLink = new System.Windows.Forms.ToolStripStatusLabel();
             this.mnuContext = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuReplaceFile = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExtractFile = new System.Windows.Forms.ToolStripMenuItem();
@@ -131,14 +131,16 @@
             this.mnuPasteAddChild = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPasteInsertSibling = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPasteAddSibling = new System.Windows.Forms.ToolStripMenuItem();
-            this.hdrType = new System.Windows.Forms.ColumnHeader();
+            this.btnExportAll = new System.Windows.Forms.Button();
             this.tabs.SuspendLayout();
             this.tabPak.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitPak)).BeginInit();
             this.splitPak.Panel1.SuspendLayout();
             this.splitPak.Panel2.SuspendLayout();
             this.splitPak.SuspendLayout();
             this.gboOpenPak.SuspendLayout();
             this.tabSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitSearch)).BeginInit();
             this.splitSearch.Panel1.SuspendLayout();
             this.splitSearch.Panel2.SuspendLayout();
             this.splitSearch.SuspendLayout();
@@ -146,6 +148,7 @@
             this.gboQbKeySearch.SuspendLayout();
             this.gboStringSearch.SuspendLayout();
             this.tabQb.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitQb)).BeginInit();
             this.splitQb.Panel1.SuspendLayout();
             this.splitQb.Panel2.SuspendLayout();
             this.splitQb.SuspendLayout();
@@ -158,9 +161,9 @@
             // 
             // tabs
             // 
-            this.tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabs.Controls.Add(this.tabPak);
             this.tabs.Controls.Add(this.tabSearch);
             this.tabs.Controls.Add(this.tabQb);
@@ -183,9 +186,9 @@
             // 
             // splitPak
             // 
-            this.splitPak.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitPak.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitPak.Location = new System.Drawing.Point(0, 0);
             this.splitPak.Name = "splitPak";
             // 
@@ -224,10 +227,10 @@
             this.lstPakContents.TabIndex = 0;
             this.lstPakContents.UseCompatibleStateImageBehavior = false;
             this.lstPakContents.View = System.Windows.Forms.View.Details;
-            this.lstPakContents.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lstPakContents_MouseClick);
-            this.lstPakContents.DoubleClick += new System.EventHandler(this.lstPakContents_DoubleClick);
             this.lstPakContents.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lstPakContents_ColumnClick);
+            this.lstPakContents.DoubleClick += new System.EventHandler(this.lstPakContents_DoubleClick);
             this.lstPakContents.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lstPakContents_KeyDown);
+            this.lstPakContents.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lstPakContents_MouseClick);
             // 
             // hdrPakFilename
             // 
@@ -248,6 +251,10 @@
             // 
             this.hdrPakLength.Text = "Length";
             this.hdrPakLength.Width = 70;
+            // 
+            // hdrType
+            // 
+            this.hdrType.Text = "Type";
             // 
             // imgList
             // 
@@ -306,8 +313,8 @@
             // 
             // gboOpenPak
             // 
-            this.gboOpenPak.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gboOpenPak.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gboOpenPak.Controls.Add(this.btnDebugFile);
             this.gboOpenPak.Controls.Add(this.txtDebugFile);
             this.gboOpenPak.Controls.Add(this.label3);
@@ -341,8 +348,8 @@
             // 
             // txtDebugFile
             // 
-            this.txtDebugFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtDebugFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDebugFile.Location = new System.Drawing.Point(76, 96);
             this.txtDebugFile.Name = "txtDebugFile";
             this.txtDebugFile.Size = new System.Drawing.Size(184, 20);
@@ -370,8 +377,8 @@
             // 
             // txtPabFile
             // 
-            this.txtPabFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPabFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPabFile.Location = new System.Drawing.Point(76, 71);
             this.txtPabFile.Name = "txtPabFile";
             this.txtPabFile.Size = new System.Drawing.Size(184, 20);
@@ -397,8 +404,8 @@
             // 
             // cboFormatType
             // 
-            this.cboFormatType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboFormatType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cboFormatType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboFormatType.FormattingEnabled = true;
             this.cboFormatType.Location = new System.Drawing.Point(76, 20);
@@ -444,8 +451,8 @@
             // 
             // txtPakFile
             // 
-            this.txtPakFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPakFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPakFile.Location = new System.Drawing.Point(76, 46);
             this.txtPakFile.Name = "txtPakFile";
             this.txtPakFile.Size = new System.Drawing.Size(184, 20);
@@ -492,8 +499,8 @@
             // 
             // gboNumberSearch
             // 
-            this.gboNumberSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gboNumberSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gboNumberSearch.Controls.Add(this.label2);
             this.gboNumberSearch.Controls.Add(this.btnNumberSearch);
             this.gboNumberSearch.Controls.Add(this.txtNumberSearch);
@@ -528,8 +535,8 @@
             // 
             // txtNumberSearch
             // 
-            this.txtNumberSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtNumberSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNumberSearch.Location = new System.Drawing.Point(44, 19);
             this.txtNumberSearch.Name = "txtNumberSearch";
             this.txtNumberSearch.Size = new System.Drawing.Size(227, 20);
@@ -548,8 +555,8 @@
             // 
             // gboQbKeySearch
             // 
-            this.gboQbKeySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gboQbKeySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gboQbKeySearch.Controls.Add(this.lblQbKeyText);
             this.gboQbKeySearch.Controls.Add(this.btnQbKeySearch);
             this.gboQbKeySearch.Controls.Add(this.txtQbKeySearch);
@@ -584,8 +591,8 @@
             // 
             // txtQbKeySearch
             // 
-            this.txtQbKeySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtQbKeySearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtQbKeySearch.Location = new System.Drawing.Point(44, 19);
             this.txtQbKeySearch.Name = "txtQbKeySearch";
             this.txtQbKeySearch.Size = new System.Drawing.Size(227, 20);
@@ -604,8 +611,8 @@
             // 
             // gboStringSearch
             // 
-            this.gboStringSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gboStringSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gboStringSearch.Controls.Add(this.lblStringBlank);
             this.gboStringSearch.Controls.Add(this.btnStringSearch);
             this.gboStringSearch.Controls.Add(this.txtStringSearch);
@@ -640,8 +647,8 @@
             // 
             // txtStringSearch
             // 
-            this.txtStringSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtStringSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.err.SetIconPadding(this.txtStringSearch, 4);
             this.txtStringSearch.Location = new System.Drawing.Point(44, 19);
             this.txtStringSearch.Name = "txtStringSearch";
@@ -662,9 +669,9 @@
             // 
             this.lstSearchResults.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.lstSearchResults.AllowColumnReorder = true;
-            this.lstSearchResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.lstSearchResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstSearchResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.hdrSearchItem,
             this.hdrSearchFile,
@@ -680,9 +687,9 @@
             this.lstSearchResults.TabIndex = 0;
             this.lstSearchResults.UseCompatibleStateImageBehavior = false;
             this.lstSearchResults.View = System.Windows.Forms.View.Details;
-            this.lstSearchResults.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lstSearchResults_MouseClick);
-            this.lstSearchResults.DoubleClick += new System.EventHandler(this.lstSearchResults_DoubleClick);
             this.lstSearchResults.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lstSearchResults_ColumnClick);
+            this.lstSearchResults.DoubleClick += new System.EventHandler(this.lstSearchResults_DoubleClick);
+            this.lstSearchResults.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lstSearchResults_MouseClick);
             // 
             // hdrSearchItem
             // 
@@ -717,9 +724,9 @@
             // 
             // splitQb
             // 
-            this.splitQb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitQb.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitQb.Location = new System.Drawing.Point(0, 0);
             this.splitQb.Margin = new System.Windows.Forms.Padding(0);
             this.splitQb.Name = "splitQb";
@@ -727,9 +734,11 @@
             // splitQb.Panel1
             // 
             this.splitQb.Panel1.Controls.Add(this.lstQbItems);
+            this.splitQb.Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.splitQb_Panel1_Paint);
             // 
             // splitQb.Panel2
             // 
+            this.splitQb.Panel2.Controls.Add(this.btnExportAll);
             this.splitQb.Panel2.Controls.Add(this.gboEdit);
             this.splitQb.Panel2.Controls.Add(this.btnSavePak);
             this.splitQb.Size = new System.Drawing.Size(757, 433);
@@ -758,8 +767,8 @@
             this.lstQbItems.TabIndex = 0;
             this.lstQbItems.UseCompatibleStateImageBehavior = false;
             this.lstQbItems.View = System.Windows.Forms.View.Details;
-            this.lstQbItems.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstQbItems_MouseUp);
             this.lstQbItems.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lstItems_ItemSelectionChanged);
+            this.lstQbItems.MouseUp += new System.Windows.Forms.MouseEventHandler(this.lstQbItems_MouseUp);
             // 
             // hdrItem
             // 
@@ -793,9 +802,9 @@
             // 
             // gboEdit
             // 
-            this.gboEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.gboEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gboEdit.Location = new System.Drawing.Point(1, 0);
             this.gboEdit.Name = "gboEdit";
             this.gboEdit.Size = new System.Drawing.Size(275, 397);
@@ -819,8 +828,7 @@
             // 
             this.status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tlblPakFileInfo,
-            this.tlblQbFileInfo,
-            this.tlblLink});
+            this.tlblQbFileInfo});
             this.status.Location = new System.Drawing.Point(0, 466);
             this.status.Name = "status";
             this.status.Size = new System.Drawing.Size(765, 22);
@@ -835,17 +843,6 @@
             // 
             this.tlblQbFileInfo.Name = "tlblQbFileInfo";
             this.tlblQbFileInfo.Size = new System.Drawing.Size(0, 17);
-            // 
-            // tlblLink
-            // 
-            this.tlblLink.IsLink = true;
-            this.tlblLink.Name = "tlblLink";
-            this.tlblLink.Size = new System.Drawing.Size(750, 17);
-            this.tlblLink.Spring = true;
-            this.tlblLink.Tag = "http://www.myspace.com/salutetothesun666";
-            this.tlblLink.Text = "Listen to this great Death Metal band: Salute To The Sun";
-            this.tlblLink.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.tlblLink.Click += new System.EventHandler(this.tlblLink_Click);
             // 
             // mnuContext
             // 
@@ -862,78 +859,78 @@
             this.mnuEditQBFile,
             this.mnuTestAllQbFiles});
             this.mnuContext.Name = "mnuContext";
-            this.mnuContext.Size = new System.Drawing.Size(162, 214);
+            this.mnuContext.Size = new System.Drawing.Size(157, 214);
             // 
             // mnuReplaceFile
             // 
             this.mnuReplaceFile.Name = "mnuReplaceFile";
-            this.mnuReplaceFile.Size = new System.Drawing.Size(161, 22);
+            this.mnuReplaceFile.Size = new System.Drawing.Size(156, 22);
             this.mnuReplaceFile.Text = "Replace File...";
             this.mnuReplaceFile.Click += new System.EventHandler(this.mnuReplaceFile_Click);
             // 
             // mnuExtractFile
             // 
             this.mnuExtractFile.Name = "mnuExtractFile";
-            this.mnuExtractFile.Size = new System.Drawing.Size(161, 22);
+            this.mnuExtractFile.Size = new System.Drawing.Size(156, 22);
             this.mnuExtractFile.Text = "Extract File...";
             this.mnuExtractFile.Click += new System.EventHandler(this.mnuExtractFile_Click);
             // 
             // mnuExtractAll
             // 
             this.mnuExtractAll.Name = "mnuExtractAll";
-            this.mnuExtractAll.Size = new System.Drawing.Size(161, 22);
+            this.mnuExtractAll.Size = new System.Drawing.Size(156, 22);
             this.mnuExtractAll.Text = "Extract All...";
             this.mnuExtractAll.Click += new System.EventHandler(this.mnuExtractAll_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(158, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(153, 6);
             // 
             // mnuNewFile
             // 
             this.mnuNewFile.Name = "mnuNewFile";
-            this.mnuNewFile.Size = new System.Drawing.Size(161, 22);
+            this.mnuNewFile.Size = new System.Drawing.Size(156, 22);
             this.mnuNewFile.Text = "New File...";
             this.mnuNewFile.Click += new System.EventHandler(this.mnuNewFile_Click);
             // 
             // mnuAddFile
             // 
             this.mnuAddFile.Name = "mnuAddFile";
-            this.mnuAddFile.Size = new System.Drawing.Size(161, 22);
+            this.mnuAddFile.Size = new System.Drawing.Size(156, 22);
             this.mnuAddFile.Text = "Add File...";
             this.mnuAddFile.Click += new System.EventHandler(this.mnuAddFile_Click);
             // 
             // mnuRenameFile
             // 
             this.mnuRenameFile.Name = "mnuRenameFile";
-            this.mnuRenameFile.Size = new System.Drawing.Size(161, 22);
+            this.mnuRenameFile.Size = new System.Drawing.Size(156, 22);
             this.mnuRenameFile.Text = "Rename File...";
             this.mnuRenameFile.Click += new System.EventHandler(this.mnuRenameFile_Click);
             // 
             // mnuRemoveFile
             // 
             this.mnuRemoveFile.Name = "mnuRemoveFile";
-            this.mnuRemoveFile.Size = new System.Drawing.Size(161, 22);
+            this.mnuRemoveFile.Size = new System.Drawing.Size(156, 22);
             this.mnuRemoveFile.Text = "Remove File";
             this.mnuRemoveFile.Click += new System.EventHandler(this.mnuRemoveFile_Click);
             // 
             // toolStripMenuItem4
             // 
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(158, 6);
+            this.toolStripMenuItem4.Size = new System.Drawing.Size(153, 6);
             // 
             // mnuEditQBFile
             // 
             this.mnuEditQBFile.Name = "mnuEditQBFile";
-            this.mnuEditQBFile.Size = new System.Drawing.Size(161, 22);
+            this.mnuEditQBFile.Size = new System.Drawing.Size(156, 22);
             this.mnuEditQBFile.Text = "Edit QB File";
             this.mnuEditQBFile.Click += new System.EventHandler(this.mnuEditQBFile_Click);
             // 
             // mnuTestAllQbFiles
             // 
             this.mnuTestAllQbFiles.Name = "mnuTestAllQbFiles";
-            this.mnuTestAllQbFiles.Size = new System.Drawing.Size(161, 22);
+            this.mnuTestAllQbFiles.Size = new System.Drawing.Size(156, 22);
             this.mnuTestAllQbFiles.Text = "Test All QB Files";
             this.mnuTestAllQbFiles.Click += new System.EventHandler(this.mnuTestAllQbFiles_Click);
             // 
@@ -1042,42 +1039,42 @@
             this.mnuCopyItems,
             this.mnuPasteItems});
             this.mnuQbEdit.Name = "mnuQbEdit";
-            this.mnuQbEdit.Size = new System.Drawing.Size(148, 142);
+            this.mnuQbEdit.Size = new System.Drawing.Size(143, 142);
             // 
             // mnuAddChild
             // 
             this.mnuAddChild.Name = "mnuAddChild";
-            this.mnuAddChild.Size = new System.Drawing.Size(147, 22);
+            this.mnuAddChild.Size = new System.Drawing.Size(142, 22);
             this.mnuAddChild.Text = "Add Child";
             // 
             // mnuInsertSibling
             // 
             this.mnuInsertSibling.Name = "mnuInsertSibling";
-            this.mnuInsertSibling.Size = new System.Drawing.Size(147, 22);
+            this.mnuInsertSibling.Size = new System.Drawing.Size(142, 22);
             this.mnuInsertSibling.Text = "Insert Sibling";
             // 
             // mnuAddSibling
             // 
             this.mnuAddSibling.Name = "mnuAddSibling";
-            this.mnuAddSibling.Size = new System.Drawing.Size(147, 22);
+            this.mnuAddSibling.Size = new System.Drawing.Size(142, 22);
             this.mnuAddSibling.Text = "Add Sibling";
             // 
             // mnuRemoveSibling
             // 
             this.mnuRemoveSibling.Name = "mnuRemoveSibling";
-            this.mnuRemoveSibling.Size = new System.Drawing.Size(147, 22);
+            this.mnuRemoveSibling.Size = new System.Drawing.Size(142, 22);
             this.mnuRemoveSibling.Text = "Remove";
             this.mnuRemoveSibling.Click += new System.EventHandler(this.qbRemoveItem);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(144, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(139, 6);
             // 
             // mnuCopyItems
             // 
             this.mnuCopyItems.Name = "mnuCopyItems";
-            this.mnuCopyItems.Size = new System.Drawing.Size(147, 22);
+            this.mnuCopyItems.Size = new System.Drawing.Size(142, 22);
             this.mnuCopyItems.Text = "Copy";
             this.mnuCopyItems.Click += new System.EventHandler(this.mnuCopyItems_Click);
             // 
@@ -1088,33 +1085,41 @@
             this.mnuPasteInsertSibling,
             this.mnuPasteAddSibling});
             this.mnuPasteItems.Name = "mnuPasteItems";
-            this.mnuPasteItems.Size = new System.Drawing.Size(147, 22);
+            this.mnuPasteItems.Size = new System.Drawing.Size(142, 22);
             this.mnuPasteItems.Text = "Paste";
             // 
             // mnuPasteAddChild
             // 
             this.mnuPasteAddChild.Name = "mnuPasteAddChild";
-            this.mnuPasteAddChild.Size = new System.Drawing.Size(147, 22);
+            this.mnuPasteAddChild.Size = new System.Drawing.Size(142, 22);
             this.mnuPasteAddChild.Text = "Add Child";
             this.mnuPasteAddChild.Click += new System.EventHandler(this.mnuPasteAddChild_Click);
             // 
             // mnuPasteInsertSibling
             // 
             this.mnuPasteInsertSibling.Name = "mnuPasteInsertSibling";
-            this.mnuPasteInsertSibling.Size = new System.Drawing.Size(147, 22);
+            this.mnuPasteInsertSibling.Size = new System.Drawing.Size(142, 22);
             this.mnuPasteInsertSibling.Text = "Insert Sibling";
             this.mnuPasteInsertSibling.Click += new System.EventHandler(this.mnuPasteInsertSibling_Click);
             // 
             // mnuPasteAddSibling
             // 
             this.mnuPasteAddSibling.Name = "mnuPasteAddSibling";
-            this.mnuPasteAddSibling.Size = new System.Drawing.Size(147, 22);
+            this.mnuPasteAddSibling.Size = new System.Drawing.Size(142, 22);
             this.mnuPasteAddSibling.Text = "Add Sibling";
             this.mnuPasteAddSibling.Click += new System.EventHandler(this.mnuPasteAddSibling_Click);
             // 
-            // hdrType
+            // btnExportAll
             // 
-            this.hdrType.Text = "Type";
+            this.btnExportAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnExportAll.Enabled = false;
+            this.btnExportAll.Location = new System.Drawing.Point(7, 403);
+            this.btnExportAll.Name = "btnExportAll";
+            this.btnExportAll.Size = new System.Drawing.Size(84, 23);
+            this.btnExportAll.TabIndex = 2;
+            this.btnExportAll.Text = "Export All...";
+            this.btnExportAll.UseVisualStyleBackColor = true;
+            this.btnExportAll.Click += new System.EventHandler(this.btnExportAll_Click);
             // 
             // EditorForm
             // 
@@ -1127,19 +1132,21 @@
             this.Name = "EditorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Queen Bee (PAK / QB Explorer, Editor)";
+            this.ResizeEnd += new System.EventHandler(this.EditorForm_Resize_Move);
             this.SizeChanged += new System.EventHandler(this.EditorForm_Resize_Move);
             this.Move += new System.EventHandler(this.EditorForm_Resize_Move);
-            this.ResizeEnd += new System.EventHandler(this.EditorForm_Resize_Move);
             this.tabs.ResumeLayout(false);
             this.tabPak.ResumeLayout(false);
             this.splitPak.Panel1.ResumeLayout(false);
             this.splitPak.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitPak)).EndInit();
             this.splitPak.ResumeLayout(false);
             this.gboOpenPak.ResumeLayout(false);
             this.gboOpenPak.PerformLayout();
             this.tabSearch.ResumeLayout(false);
             this.splitSearch.Panel1.ResumeLayout(false);
             this.splitSearch.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitSearch)).EndInit();
             this.splitSearch.ResumeLayout(false);
             this.gboNumberSearch.ResumeLayout(false);
             this.gboNumberSearch.PerformLayout();
@@ -1150,6 +1157,7 @@
             this.tabQb.ResumeLayout(false);
             this.splitQb.Panel1.ResumeLayout(false);
             this.splitQb.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitQb)).EndInit();
             this.splitQb.ResumeLayout(false);
             this.status.ResumeLayout(false);
             this.status.PerformLayout();
@@ -1192,7 +1200,6 @@
         private System.Windows.Forms.StatusStrip status;
         private System.Windows.Forms.ToolStripStatusLabel tlblPakFileInfo;
         private System.Windows.Forms.ToolStripStatusLabel tlblQbFileInfo;
-        private System.Windows.Forms.ToolStripStatusLabel tlblLink;
         private System.Windows.Forms.Button btnInfo;
         private System.Windows.Forms.ContextMenuStrip mnuContext;
         private System.Windows.Forms.ToolStripMenuItem mnuTestAllQbFiles;
@@ -1266,5 +1273,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuNewFile;
         private System.Windows.Forms.ToolStripMenuItem mnuRenameFile;
         private System.Windows.Forms.ColumnHeader hdrType;
+        private System.Windows.Forms.Button btnExportAll;
     }
 }

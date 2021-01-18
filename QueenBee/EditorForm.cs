@@ -19,7 +19,10 @@ namespace Nanook.QueenBee
     {
         [DllImport("user32", CharSet = CharSet.Auto)]
         private extern static IntPtr SendMessage(IntPtr hWnd, int msg, int wParam, IntPtr lParam);
-        private const int WM_SETREDRAW = 0x000B;   
+        private const int WM_SETREDRAW = 0x000B;
+
+        private String prevSectionPosition = "";
+        private bool prevSection = false;
 
         private delegate void testSearchItem(QbFile qbFile, QbItemBase item);
 
@@ -351,6 +354,7 @@ namespace Nanook.QueenBee
                 finally
                 {
                     lstPakContents.ListViewItemSorter = _lvwPakColumnSorter;
+                    btnExportAll.Enabled = true;
                     lstPakContents.EndUpdate();
                 }
 
@@ -538,15 +542,43 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                     }
                 }
 
-                //clear items without as much flicker as Items.Clear
-                for (int i = lstQbItems.Items.Count - 1; i >= 0; i--)
-                    lstQbItems.Items.RemoveAt(i);
+                String subStr = _pakFile.Filename.Substring(_pakFile.Filename.IndexOf('_') + 1, 12);
 
-                foreach (QbItemBase itm in _qbFile.Items)
+                if (subStr != "text.pak.xen")
                 {
-                    addItemToGui(itm, 0);
-                    addSubItemsToGui(itm, 0 + 1);
+                    //clear items without as much flicker as Items.Clear
+                    for (int i = lstQbItems.Items.Count - 1; i >= 0; i--)
+                        lstQbItems.Items.RemoveAt(i);
 
+                    System.IO.DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory + "Export\\");
+
+                    foreach (FileInfo file in di.EnumerateFiles())
+                    {
+                        file.Delete();
+                    }
+                    foreach (DirectoryInfo dir in di.EnumerateDirectories())
+                    {
+                        dir.Delete(true);
+                    }
+
+                    int counter = 0;
+                    foreach (QbItemBase itm in _qbFile.Items)
+                    {
+                        counter = ExportAll(itm, null, counter);
+                        addItemToGui(itm, 0);
+                        addSubItemsToGui(itm, 0 + 1);
+                        counter++;
+                    }
+                }
+                else
+                {
+                    int counter = 0;
+                    foreach (QbItemBase itm in _qbFile.Items)
+                    {
+                        ExportSectionNames(itm);
+                        addItemToGui(itm, 0);
+                        addSubItemsToGui(itm, 0 + 1);
+                    }
                 }
 
                 ListViewItem foundItem = null;
@@ -611,6 +643,307 @@ This PAK has no StructItem children so this setting could not be detected.", "St
             {
                 addItemToGui(itm, indent);
                 addSubItemsToGui(itm, indent + 1);
+            }
+        }
+
+        private int ExportAll(QbItemBase parent, string folderString, int counter)
+        {
+            if (parent.Items.Count == 0)
+            {
+                string dname = AppDomain.CurrentDomain.BaseDirectory + "Export";
+                if (folderString != null)
+                {
+                    dname += folderString;
+                }
+
+                if (!Directory.Exists(dname))
+                    Directory.CreateDirectory(dname);
+
+                string fname = dname + "\\" + parent.Position + ".array.txt";
+
+                AppState.LastArrayPath = (new FileInfo(fname)).DirectoryName;
+
+                if (parent.QbItemValue != 0)
+                {
+                    if (prevSection == true)
+                    {
+                        if (parent.QbItemType == QbItemType.StructItemQbKeyString)
+                        {
+                            QbItemQbKey convertedParent = (QbItemQbKey)parent.Clone();
+                            fname = dname + "\\" + convertedParent.Values[0].ToString() + ".array.txt";
+
+                            using (FileStream fs = new FileStream(fname, FileMode.Append, FileAccess.Write))
+                            {
+                                using (TextWriter tw = new StreamWriter(fs))
+                                {
+                                    foreach (QbKey value in convertedParent.Values)
+                                    {
+                                        tw.WriteLine(prevSectionPosition);
+                                        tw.WriteLine(value);
+                                    }
+                                }
+                            }
+                            prevSection = false;
+                        }
+                    }
+                    else
+                    {
+                        if (parent.QbItemType == QbItemType.ArrayInteger)
+                        {
+                            using (FileStream fs = new FileStream(fname, FileMode.CreateNew, FileAccess.Write))
+                            {
+                                using (TextWriter tw = new StreamWriter(fs))
+                                {
+                                    QbItemInteger convertedParent = (QbItemInteger)parent.Clone();
+                                    foreach (uint value in convertedParent.Values)
+                                        tw.WriteLine(value);
+                                }
+                            }
+                        }
+
+                        else if (parent.QbItemType == QbItemType.StructItemInteger)
+                        {
+                            QbItemInteger convertedParent = (QbItemInteger)parent.Clone();
+                            prevSection = true;
+                            prevSectionPosition = convertedParent.Values[0].ToString();
+                        }
+                    }
+                }
+                return counter;
+            }
+            else
+            {
+                /*if (parent.DebugName != null && parent.DebugName != "")
+                    folderString += "\\" + parent.DebugName;
+                else
+                    folderString += "\\" + parent.Position;
+                foreach (QbItemBase itm in parent.Items)
+                    exportAll(itm, folderString, counter++);*/
+
+                if (parent.DebugName != null && parent.DebugName != "")
+                    folderString += "\\" + parent.DebugName;
+                else
+                {
+                    //if (folderString != "\\" + counter.ToString())
+                    //{
+                        folderString += "\\" + counter;
+                    //}
+                    switch (folderString)
+                    {
+                        case "\\1":
+                            folderString = "\\lead_Easy";
+                            break;
+                        case "\\2":
+                            folderString = "\\lead_Medium";
+                            break;
+                        case "\\3":
+                            folderString = "\\lead_Hard";
+                            break;
+                        case "\\4":
+                            folderString = "\\lead_Expert";
+                            break;
+                        case "\\5\\5":
+                            folderString = "\\lead_Easy_SP";
+                            break;
+                        case "\\6\\6":
+                            folderString = "\\lead_Medium_SP";
+                            break;
+                        case "\\7\\7":
+                            folderString = "\\lead_Hard_SP";
+                            break;
+                        case "\\8\\8":
+                            folderString = "\\lead_Expert_SP";
+                            break;
+                        case "\\9\\9":
+                            folderString = "\\lead_Easy_BattleSP";
+                            break;
+                        case "\\10\\10":
+                            folderString = "\\lead_Medium_BattleSP";
+                            break;
+                        case "\\11\\11":
+                            folderString = "\\lead_Hard_BattleSP";
+                            break;
+                        case "\\12\\12":
+                            folderString = "\\lead_Expert_BattleSP";
+                            break;
+                            
+                        case "\\13":
+                            folderString = "\\bass_Easy";
+                            break;
+                        case "\\14":
+                            folderString = "\\bass_Medium";
+                            break;
+                        case "\\15":
+                            folderString = "\\bass_Hard";
+                            break;
+                        case "\\16":
+                            folderString = "\\bass_Expert";
+                            break;
+                        case "\\17\\17":
+                            folderString = "\\bass_Easy_SP";
+                            break;
+                        case "\\18\\18":
+                            folderString = "\\bass_Medium_SP";
+                            break;
+                        case "\\19\\19":
+                            folderString = "\\bass_Hard_SP";
+                            break;
+                        case "\\20\\20":
+                            folderString = "\\bass_Expert_SP";
+                            break;
+                        case "\\21\\21":
+                            folderString = "\\bass_Easy_BattleSP";
+                            break;
+                        case "\\22\\22":
+                            folderString = "\\bass_Medium_BattleSP";
+                            break;
+                        case "\\23\\23":
+                            folderString = "\\bass_Hard_BattleSP";
+                            break;
+                        case "\\24\\24":
+                            folderString = "\\bass_Expert_BattleSP";
+                            break;
+
+                        case "\\25":
+                            folderString = "\\coop_lead_Easy";
+                            break;
+                        case "\\26":
+                            folderString = "\\coop_lead_Medium";
+                            break;
+                        case "\\27":
+                            folderString = "\\coop_lead_Hard";
+                            break;
+                        case "\\28":
+                            folderString = "\\coop_lead_Expert";
+                            break;
+                        case "\\29\\29":
+                            folderString = "\\coop_lead_Easy_SP";
+                            break;
+                        case "\\30\\30":
+                            folderString = "\\coop_lead_Medium_SP";
+                            break;
+                        case "\\31\\31":
+                            folderString = "\\coop_lead_Hard_SP";
+                            break;
+                        case "\\32\\32":
+                            folderString = "\\coop_lead_Expert_SP";
+                            break;
+                        case "\\33\\33":
+                            folderString = "\\coop_lead_Easy_BattleSP";
+                            break;
+                        case "\\34\\34":
+                            folderString = "\\coop_lead_Medium_BattleSP";
+                            break;
+                        case "\\35\\35":
+                            folderString = "\\coop_lead_Hard_BattleSP";
+                            break;
+                        case "\\36\\36":
+                            folderString = "\\coop_lead_Expert_BattleSP";
+                            break;
+
+                        case "\\37":
+                            folderString = "\\coop_rhythm_Easy";
+                            break;
+                        case "\\38":
+                            folderString = "\\coop_rhythm_Medium";
+                            break;
+                        case "\\39":
+                            folderString = "\\coop_rhythm_Hard";
+                            break;
+                        case "\\40":
+                            folderString = "\\coop_rhythm_Expert";
+                            break;
+                        case "\\41\\41":
+                            folderString = "\\coop_rhythm_Easy_SP";
+                            break;
+                        case "\\42\\42":
+                            folderString = "\\coop_rhythm_Medium_SP";
+                            break;
+                        case "\\43\\43":
+                            folderString = "\\coop_rhythm_Hard_SP";
+                            break;
+                        case "\\44\\44":
+                            folderString = "\\coop_rhythm_Expert_SP";
+                            break;
+                        case "\\45\\45":
+                            folderString = "\\coop_rhythm_Easy_BattleSP";
+                            break;
+                        case "\\46\\46":
+                            folderString = "\\coop_rhythm_Medium_BattleSP";
+                            break;
+                        case "\\47\\47":
+                            folderString = "\\coop_rhythm_Hard_BattleSP";
+                            break;
+                        case "\\48\\48":
+                            folderString = "\\coop_rhythm_Expert_BattleSP";
+                            break;
+
+                        case "\\53\\53":
+                            folderString = "\\timesig";
+                            break;
+                        case "\\54":
+                            folderString = "\\beatlines";
+                            break;
+                        case "\\55\\55\\55":
+                            folderString = "\\sections";
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+                foreach (QbItemBase itm in parent.Items)
+                {
+                    counter = ExportAll(itm, folderString, counter++);
+                }
+                return counter;
+            }
+        }
+
+        private void ExportSectionNames(QbItemBase parent)
+        {
+            if (parent.QbItemType == QbItemType.SectionStringW)
+            {
+                QbItemString convertedParent = (QbItemString)parent.Clone();
+                String fname = "Export\\sections\\" + convertedParent.ItemQbKey.ToString() + ".array.txt";
+                String sectionPosition = "";
+
+                try
+                {
+                    using (FileStream fs1 = new FileStream(fname, FileMode.Open, FileAccess.Read))
+                    {
+                        using (StreamReader sr = new StreamReader(fs1))
+                        {
+                            sectionPosition = sr.ReadLine();
+                        }
+                        fs1.Close();
+                    }
+
+                    using (FileStream fs2 = new FileStream(fname, FileMode.Create, FileAccess.Write))
+                    {
+                        using (TextWriter tw = new StreamWriter(fs2))
+                        {
+                            tw.WriteLine(sectionPosition);
+                            tw.Write(convertedParent.Strings[0]);
+                        }
+                    }
+                } catch
+                {
+                    return;
+                }
+            }
+            // Print DLC QB Keys
+            System.Collections.Generic.List<QbItemBase> genericQbItems = parent.Items;
+            for (int i = 0; i < genericQbItems.Count; i++)
+            {
+                if (genericQbItems[0].Items.Count > 0)
+                {
+                    QbItemString qbItemString = (QbItemString)genericQbItems[i].Items[0].Items[1];
+                    QbItemQbKey itemStructArray = (QbItemQbKey)genericQbItems[i].Items[0].Items[2];
+                    Console.WriteLine(qbItemString.Strings[0]);
+                    Console.WriteLine(itemStructArray.Values[0]);
+                    Console.WriteLine("_");
+                }
             }
         }
 
@@ -2615,8 +2948,14 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
         private QbItemBase _copyItem;
 
+        private void splitQb_Panel1_Paint(object sender, PaintEventArgs e)
+        {
 
+        }
 
-
+        private void btnExportAll_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace Nanook.QueenBee.Parser
 {
     public class QbItemInteger : QbItemBase
     {
+
         public QbItemInteger(QbFile root) : base(root)
         {
         }

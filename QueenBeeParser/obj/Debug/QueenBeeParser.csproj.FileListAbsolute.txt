@@ -1,0 +1,6 @@
+Z:\Documents\Repos\Queen-Bee\QueenBeeParser\bin\Debug\QueenBeeParser.dll
+Z:\Documents\Repos\Queen-Bee\QueenBeeParser\bin\Debug\QueenBeeParser.pdb
+Z:\Documents\Repos\Queen-Bee\QueenBeeParser\obj\Debug\QueenBeeParser.csprojAssemblyReference.cache
+Z:\Documents\Repos\Queen-Bee\QueenBeeParser\obj\Debug\QueenBeeParser.csproj.CoreCompileInputs.cache
+Z:\Documents\Repos\Queen-Bee\QueenBeeParser\obj\Debug\QueenBeeParser.dll
+Z:\Documents\Repos\Queen-Bee\QueenBeeParser\obj\Debug\QueenBeeParser.pdb
