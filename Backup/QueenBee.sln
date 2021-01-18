@@ -1,8 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
-MinimumVisualStudioVersion = 10.0.40219.1
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueenBee", "QueenBee\QueenBee.csproj", "{AF6970E6-CD1E-497B-9AA1-ACE2EE800E17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueenBeeParser", "QueenBeeParser\QueenBeeParser.csproj", "{EEFF0E58-CD15-4D7B-945C-2C2F0584D43B}"
@@ -24,8 +22,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B6D4A48B-8058-4331-B935-A776FB0FA120}
 	EndGlobalSection
 EndGlobal
