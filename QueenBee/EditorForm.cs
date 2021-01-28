@@ -560,6 +560,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                         dir.Delete(true);
                     }
 
+                    // Iteratively export all arrays from the qb file
                     int counter = 0;
                     foreach (QbItemBase itm in _qbFile.Items)
                     {
@@ -568,9 +569,12 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                         addSubItemsToGui(itm, 0 + 1);
                         counter++;
                     }
+                    prevSection = false;
+                    prevSectionPosition = "";
                 }
                 else
                 {
+                    // Try to insert section names to existing export if possible
                     foreach (QbItemBase itm in _qbFile.Items)
                     {
                         ExportSectionNames(itm);
