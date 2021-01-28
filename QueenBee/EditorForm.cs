@@ -342,7 +342,6 @@ namespace Nanook.QueenBee
                     }
 
                     lstPakContents.Focus();
-
                     updateStatusItems();
                 }
                 catch (Exception ex)
@@ -572,7 +571,6 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 }
                 else
                 {
-                    int counter = 0;
                     foreach (QbItemBase itm in _qbFile.Items)
                     {
                         ExportSectionNames(itm);
@@ -648,23 +646,26 @@ This PAK has no StructItem children so this setting could not be detected.", "St
 
         private int ExportAll(QbItemBase parent, string folderString, int counter)
         {
+            // If the current qb file is an array and not a container
             if (parent.Items.Count == 0)
             {
+                // Create directory based on the array's parent name
                 string dname = AppDomain.CurrentDomain.BaseDirectory + "Export";
                 if (folderString != null)
                 {
                     dname += folderString;
                 }
-
                 if (!Directory.Exists(dname))
                     Directory.CreateDirectory(dname);
 
+                // Assign file name based on array position
                 string fname = dname + "\\" + parent.Position + ".array.txt";
-
                 AppState.LastArrayPath = (new FileInfo(fname)).DirectoryName;
 
+                // If the array contains a valid value
                 if (parent.QbItemValue != 0)
                 {
+                    // Check if the last exported array is a section that hasn't been printed
                     if (prevSection == true)
                     {
                         if (parent.QbItemType == QbItemType.StructItemQbKeyString)
@@ -672,6 +673,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                             QbItemQbKey convertedParent = (QbItemQbKey)parent.Clone();
                             fname = dname + "\\" + convertedParent.Values[0].ToString() + ".array.txt";
 
+                            // Print section position and corresponding qb key
                             using (FileStream fs = new FileStream(fname, FileMode.Append, FileAccess.Write))
                             {
                                 using (TextWriter tw = new StreamWriter(fs))
@@ -688,6 +690,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                     }
                     else
                     {
+                        // Check if the array is a valid integer array, then print to array.txt file
                         if (parent.QbItemType == QbItemType.ArrayInteger)
                         {
                             using (FileStream fs = new FileStream(fname, FileMode.CreateNew, FileAccess.Write))
@@ -701,8 +704,10 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                             }
                         }
 
+                        // Check if array is a section file
                         else if (parent.QbItemType == QbItemType.StructItemInteger)
                         {
+                            // Convert StructItemInteger to ArrayInteger and set section globals
                             QbItemInteger convertedParent = (QbItemInteger)parent.Clone();
                             prevSection = true;
                             prevSectionPosition = convertedParent.Values[0].ToString();
@@ -711,23 +716,17 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 }
                 return counter;
             }
+            // If the currect qb file is a container
             else
             {
-                /*if (parent.DebugName != null && parent.DebugName != "")
-                    folderString += "\\" + parent.DebugName;
-                else
-                    folderString += "\\" + parent.Position;
-                foreach (QbItemBase itm in parent.Items)
-                    exportAll(itm, folderString, counter++);*/
-
+                // Use folder names supplied by dbg.pak file
                 if (parent.DebugName != null && parent.DebugName != "")
                     folderString += "\\" + parent.DebugName;
+
+                // Otherwise convert folder names to the following based on their position in the pak
                 else
                 {
-                    //if (folderString != "\\" + counter.ToString())
-                    //{
-                        folderString += "\\" + counter;
-                    //}
+                    folderString += "\\" + counter;
                     switch (folderString)
                     {
                         case "\\1":
@@ -892,6 +891,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                             break;
                     }
                 }
+                // Continue iterative loop for arrays inside of containers
                 foreach (QbItemBase itm in parent.Items)
                 {
                     counter = ExportAll(itm, folderString, counter++);
@@ -899,17 +899,19 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                 return counter;
             }
         }
-
+        
         private void ExportSectionNames(QbItemBase parent)
         {
             if (parent.QbItemType == QbItemType.SectionStringW)
             {
+                // Find previous section file by qb key
                 QbItemString convertedParent = (QbItemString)parent.Clone();
                 String fname = "Export\\sections\\" + convertedParent.ItemQbKey.ToString() + ".array.txt";
                 String sectionPosition = "";
 
                 try
                 {
+                    // Attempt to get the qb position stored in the file if the correct file exists
                     using (FileStream fs1 = new FileStream(fname, FileMode.Open, FileAccess.Read))
                     {
                         using (StreamReader sr = new StreamReader(fs1))
@@ -919,6 +921,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                         fs1.Close();
                     }
 
+                    // Print new section file with qb key replaced with corresponding section name
                     using (FileStream fs2 = new FileStream(fname, FileMode.Create, FileAccess.Write))
                     {
                         using (TextWriter tw = new StreamWriter(fs2))
@@ -932,7 +935,7 @@ This PAK has no StructItem children so this setting could not be detected.", "St
                     return;
                 }
             }
-            // Print DLC QB Keys
+            // Print DLC QB Keys to console (for debug)
             System.Collections.Generic.List<QbItemBase> genericQbItems = parent.Items;
             for (int i = 0; i < genericQbItems.Count; i++)
             {
